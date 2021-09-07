@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 def uppercase(str):
-    str = str + "\n"
+    s = ""
     for i in str:
-        letter = "abcdefghijklmnopqrstuvwxyz"
-        if i in letter:
-            letter = ord(i) - 32
+        x = ord(i)
+        if ord('a') <= x <= ord('z'):
+            s += chr(x - 32)
         else:
-            letter = ord(i)
-        print("{:c}".format(letter), end='')
-    
+            s += i
+    print("{:s}".format(s))
