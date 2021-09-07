@@ -8,4 +8,4 @@ def uppercase(str):
         else:
             letter = ord(i)
         print("{:c}".format(letter), end='')
-        
+       
