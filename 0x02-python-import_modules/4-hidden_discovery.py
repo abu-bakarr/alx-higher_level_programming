@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
     import hidden_4
-
-    list = dir(hidden_4)
-
-    for i in range(len(list)):
-        if "__" not in list[i]:
-            print(list[i])
+    lis = dir(hidden_4)
+    new = []
+    for a in lis:
+        if a[0] != '_':
+            new.append(a)
+    new.sort()
+    for a in new:
+        print(a)
