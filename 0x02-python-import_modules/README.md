@@ -1,0 +1,1 @@
+this is third exercise of python
