@@ -1,19 +1,20 @@
 #!/usr/bin/python3
-"""Define function add_integer."""
+
+
+'''
+   0-add_integer function
+   Contains a function that adds two integers
+'''
 
 
 def add_integer(a, b=98):
-    """
-    Add two numbers
-    Parameters:
-        a (int or float)
-        b (int or float) for default = 98
-    Return: Integer addition of a and b.
-    Raises:
-        TypeError: When a or b is a non-integer and non-float.
-    """
-    if ((type(a) != int) and (type(a) != float)):
-        raise TypeError("a must be an integer")
-    if ((type(b) != int) and (type(b) != float)):
-        raise TypeError("b must be an integer")
-    return int(a) + int(b)
+    '''
+    Python function to sum two integers, check if a/b is int & float
+    '''
+    if type(a) is int or type(a) is float:
+        if type(b) is int or type(b) is float:
+            return int(a) + int(b)
+        else:
+            raise TypeError('b must be an integer')
+    else:
+        raise TypeError('a must be an integer')
