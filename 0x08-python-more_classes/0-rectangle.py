@@ -1,6 +1,8 @@
 #!/usr/bin/python3
-""" this is an empty class that defines a rectangle """
+"""Doc
+"""
 
-class Rectangle():
-                """ docstring for Rentangle """
-                pass
+
+class Rectangle:
+    """ Doc """
+    pass
