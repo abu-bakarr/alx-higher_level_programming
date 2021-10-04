@@ -1,48 +1,70 @@
-====================================
-How use 5-text_indentation
-====================================
-=====
-Usage
-=====
+>>> text_indentation = __import__('5-text_indentation').text_indentation
 
---------------------
-Import the function:
---------------------
+=======================================================================
+Traceback (most recent call last):
+TypeError: text must be a string
+=======================================================================
 
-    >>> text_indentation = __import__('5-text_indentation').text_indentation
 
---------------------------------
-Test for Succes Cases:
---------------------------------
-    
-Tests for positive int value.
 
-    >>> text_indentation("Hello World.")
-    Hello World.
-    <BLANKLINE>
+>>> text_indentation(1)
+Traceback (most recent call last):
+TypeError: text must be a string
 
-    >>> text_indentation("Quonam modo?")
-    Quonam modo?
-    <BLANKLINE>
+>>> text_indentation((1))
+Traceback (most recent call last):
+TypeError: text must be a string
 
----------------------------------
-Test for error Cases:
----------------------------------
+>>> text_indentation(None)
+Traceback (most recent call last):
+TypeError: text must be a string
 
-Tests for None input.
-    >>> text_indentation(None)
-    Traceback (most recent call last):
-    TypeError: text must be a string
+>>> text_indentation([])
+Traceback (most recent call last):
+TypeError: text must be a string
 
-Tests for a list object.
-    >>> text_indentation([1, 2, 3])
-    Traceback (most recent call last):
-    TypeError: text must be a string
+>>> text_indentation({})
+Traceback (most recent call last):
+TypeError: text must be a string
 
----------------------------------
-Pep8 style:
----------------------------------
+>>> text_indentation({'a': 1})
+Traceback (most recent call last):
+TypeError: text must be a string
 
-    >>> import os
-    >>> os.popen("pep8 5-text_indentation.py").read()
-    ''
+>>> text_indentation((1,))
+Traceback (most recent call last):
+TypeError: text must be a string
+
+>>> text_indentation([[], [], []])
+Traceback (most recent call last):
+TypeError: text must be a string
+
+>>> text_indentation([[6, 6, 6], [6, 6, 6], [6, 6, 6]])
+Traceback (most recent call last):
+TypeError: text must be a string
+
+>>> text_indentation([[6], [6, 6], [6, 6, 6]])
+Traceback (most recent call last):
+TypeError: text must be a string
+
+>>> text_indentation([[6], [6, 6], [6]])
+Traceback (most recent call last):
+TypeError: text must be a string
+
+==========================================
+Output tests
+==========================================
+
+>>> text_indentation('Lovel.Bangura.Abubakarr')
+Lovel.
+<BLANKLINE>
+Bangura.
+<BLANKLINE>
+Abubakarr
+
+>>> text_indentation(' .hello you? there ')
+.
+<BLANKLINE>
+hello you?
+<BLANKLINE>
+there
