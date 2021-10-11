@@ -1,12 +1,10 @@
 #!/usr/bin/python3
-"""
-MyList class and print sorted function
+"""Doc
 """
 
 
 class MyList(list):
-    """ Simple list Class"""
-
+    """Doc"""
     def print_sorted(self):
-        """ Print the list in sorted order"""
+        """Print list sort """
         print(sorted(self))
