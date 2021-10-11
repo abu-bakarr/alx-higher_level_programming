@@ -1,11 +1,13 @@
 #!/usr/bin/python3
-"""[summary]
-"""
+'''Module that returns the list of available
+attributes and methods of an object'''
+
 
 def lookup(obj):
-    """Return Attribute and methods
-    of a object.
-    """
-    mylist = []
-    mylist = dir(obj)
-    return mylist
+    '''Function that returns the list of available
+    attributes and methods of an object
+    Args:
+        obj: the object to list
+    Return: a list
+    '''
+    return dir(obj)
