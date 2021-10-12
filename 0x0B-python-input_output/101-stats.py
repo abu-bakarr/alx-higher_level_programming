@@ -1,38 +1,36 @@
 #!/usr/bin/python3
+"""Script that reads stdin line by line and computes metrics"""
+
+
 import sys
+import signal
+
+count = 1
+f_size = 0
+status_c = {'200': 0, '301': 0, '400': 0, '401': 0,
+            '403': 0, '404': 0, '405': 0, '500': 0}
 
 
-def print_status():
-    '''
-        Printing the status of the request
-    '''
-    counter = 0
-    size = 0
-    file_size = 0
-    status_codes = {"200": 0, "301": 0, "400": 0, "401": 0,
-                    "403": 0, "404": 0, "405": 0, "500": 0}
-
-    for l in sys.stdin:
-        line = l.split()
-        try:
-            size += int(line[-1])
-            code = line[-2]
-            status_codes[code] += 1
-        except:
-            continue
-        if counter == 9:
-            print("File size: {}".format(size))
-            for key, val in sorted(status_codes.items()):
-                if (val != 0):
-                    print("{}: {}".format(key, val))
-            counter = 0
-        counter += 1
-    if counter < 9:
-        print("File size: {}".format(size))
-        for key, val in sorted(status_codes.items()):
-            if (val != 0):
-                print("{}: {}".format(key, val))
+def print_summary():
+    """Function prints a summary of data"""
+    sorted_status = sorted(status_c)
+    print("File size: {}".format(f_size))
+    for elem in sorted_status:
+        if status_c[elem] != 0:
+            print("{}: {}".format(elem, status_c[elem]))
 
 
-if __name__ == "__main__":
-    print_status()
+def signal_handler(sig, frame):
+    """Function signal handler"""
+    print_summary()
+    sys.exit(0)
+
+for line in sys.stdin:
+    l = line.split()
+    f_size += int(l[8])
+    status_c[l[7]] += 1
+    if count == 10:
+        print_summary()
+        count = 0
+    count += 1
+    signal.signal(signal.SIGINT, signal_handler)
