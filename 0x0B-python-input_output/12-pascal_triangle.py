@@ -13,5 +13,5 @@ def pascal_triangle(n):
         for y in range(1, x + 1):
             res[x - 1].append(c)
             c = int(c * (x - y) / y)
-            return c
+            
     return res
