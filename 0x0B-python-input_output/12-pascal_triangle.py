@@ -1,17 +1,14 @@
 #!/usr/bin/python3
-"""Module Pascal's Triangle"""
+"""Doc
+"""
+
 
 def pascal_triangle(n):
-    """rReturns a list of lists of integers
-    representing the Pascal’s triangle of n"""
-    res = []
+    """pascal's trinagule """
     if n <= 0:
         return []
-    for x in range(1, n + 1):
-        c = 1
-        res.append([])
-        for y in range(1, x + 1):
-            res[x - 1].append(c)
-            c = int(c * (x - y) / y)
-            
-    return res
+    lisTri = [[1]]
+    for i in range(2, n+1):
+        tmp = [0] + lisTri[i-2] + [0]
+        lisTri.append([sum(par) for par in zip(tmp, tmp[1:])])
+    return lisTri
