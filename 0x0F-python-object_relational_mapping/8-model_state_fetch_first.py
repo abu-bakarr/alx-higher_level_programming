@@ -9,6 +9,7 @@ from model_state import State
 
 if __name__ == "__main__":
 
+    # Create engine. The args comes from input
     engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
                            .format(argv[1], argv[2], argv[3]),
                            pool_pre_ping=True)
@@ -16,10 +17,9 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
     # Query
-    intial_state = session.query(State).order_by(State.id).first()
+    first_state = session.query(State).order_by(State.id).first()
     # Print results
-    if intial_state is None:
-        print("Nothing.")
+    if first_state is None:
+        print("Nothing")
     else:
-        print("{}: {}".format(intial_state.id, intial_state.name))
-
+        print("{}: {}".format(first_state.id, first_state.name))
