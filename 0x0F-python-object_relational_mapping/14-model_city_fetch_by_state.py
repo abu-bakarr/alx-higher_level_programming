@@ -1,17 +1,26 @@
 #!/usr/bin/python3
-from model_state import State, Base
+"""SQLalchemy"""
+import sys
+from model_state import Base, State
 from model_city import City
+from sqlalchemy import (create_engine)
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
-from sys import argv
+from sqlalchemy.engine.url import URL
+
 
 if __name__ == "__main__":
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
-                           .format(argv[1], argv[2], argv[3]),
-                           pool_pre_ping=True)
+    db = {'drivername': 'mysql+mysqldb',
+          'host': 'localhost',
+          'port': '3306',
+          'username': sys.argv[1],
+          'password': sys.argv[2],
+          'database': sys.argv[3]}
+    url = URL(**db)
+    engine = create_engine(url, pool_pre_ping=True)
+    Base.metadata.create_all(engine)
+
     session = Session(engine)
-    state_result = session.query(City, State)\
-                          .filter(City.state_id == State.id)\
-                          .order_by(City.id.asc())
-    for city, state in state_result:
+
+    data = session.query(State, City).filter(State.id == City.state_id)
+    for state, city in data:
         print("{}: ({}) {}".format(state.name, city.id, city.name))
