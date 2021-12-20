@@ -1,28 +1,37 @@
 #!/usr/bin/python3
-"""SQLalchemy"""
-import sys
-from model_state import Base, State
-from sqlalchemy import (func, create_engine)
-from sqlalchemy.orm import Session
-from sqlalchemy.engine.url import URL
+"""
+lists all State objects that contain the letter a
+from the database hbtn_0e_6_usa
+"""
+from sys import argv
+from sqlalchemy import (create_engine)
+from sqlalchemy.orm import sessionmaker
+from model_state import State
+
+
+# Add a security layer with the main function
+def main():
+    """
+    Print the State object with the name passed as argument
+    from the database hbtn_0e_6_usa
+    """
+    # Create engine. The args comes from input
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
+                           .format(argv[1], argv[2], argv[3]),
+                           pool_pre_ping=True)
+    # Start Session
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    # Query
+    states = session.query(State)
+    state_name = argv[4]
+    # Print results
+    for state in states:
+        if state.name == state_name:
+            print(state.id)
+            return
+    print("Not found")
 
 
 if __name__ == "__main__":
-    db = {'drivername': 'mysql+mysqldb',
-          'host': 'localhost',
-          'port': '3306',
-          'username': sys.argv[1],
-          'password': sys.argv[2],
-          'database': sys.argv[3]}
-    url = URL(**db)
-    engine = create_engine(url, pool_pre_ping=True)
-    Base.metadata.create_all(engine)
-
-    session = Session(engine)
-
-    try:
-        data = session.query(State).filter(State.name == sys.argv[4]).first()
-        print(data.id)
-    except:
-        print("Not found")
-    session.close()
+    main()
