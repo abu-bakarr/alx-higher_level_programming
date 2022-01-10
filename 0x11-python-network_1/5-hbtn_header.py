@@ -1,7 +1,9 @@
 #!/usr/bin/python3
-import requests
+""" Fetches https://intranet.hbtn.io/status """
+from requests import get
 from sys import argv
 
 
 if __name__ == "__main__":
-    print(requests.get(argv[1]).headers.get('X-Request-Id'))
+    res = get(argv[1])
+    print(res.headers.get('X-Request-Id'))
