@@ -1,12 +1,19 @@
 #!/usr/bin/python3
-""" Fetches https://intranet.hbtn.io/status """
-from urllib import request, error
+"""
+    Takes in a URL, sends a request to the URL
+    and displays the body of the response
+"""
+
+
+import urllib.request
 from sys import argv
 
-
 if __name__ == "__main__":
+
+    url = argv[1]
+
     try:
-        with request.urlopen(argv[1]) as res:
-            print(res.read().decode('utf-8'))
-    except error.HTTPError as err:
-        print("Error : {}".format(err.code))
+        with urllib.request.urlopen(url) as response:
+            print(response.read().decode('utf-8'))
+    except urllib.error.HTTPError as error:
+        print("Error code: {}".format(error.code))
